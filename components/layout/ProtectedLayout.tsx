@@ -33,9 +33,9 @@ export default function ProtectedLayout({
   }
 
   return (
-    <main className='flex flex-col relative'>
+    <div className='flex flex-col relative'>
       <Header />
       {children}
-    </main>
+    </div>
   )
 }

@@ -30,7 +30,7 @@ export default function Home() {
       {session.status === 'loading' ? (
         <Skeleton className='w-[200px] h-5 rounded-full' />
       ) : session.status === 'unauthenticated' ? (
-        <Card className='w-[300px]'>
+        <Card className='w-full container max-w-md'>
           <CardHeader>
             <CardTitle>Login</CardTitle>
             <CardDescription>Looks like you are not logged in!</CardDescription>
