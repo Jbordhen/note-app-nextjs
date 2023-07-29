@@ -8,34 +8,20 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
-import { useToast } from '@/components/ui/use-toast'
-import { useSession, signIn, signOut } from 'next-auth/react'
+import { useSession, signIn } from 'next-auth/react'
 import { useRouter } from 'next/router'
 
 export default function Home() {
   const session = useSession()
   const router = useRouter()
-  const { toast } = useToast()
 
-  const handleGoogleSignin = () => {
+  const handleGithubSignin = () => {
     signIn('github')
   }
 
-  if (session.status === 'unauthenticated') {
-    router.push('/signin')
-  }
-
   if (session.status === 'authenticated') {
-    if (session.data.user?.email) {
-      router.push('/dashboard')
-    } else {
-      toast({
-        title: 'Email not found',
-        description: 'User email is found, signing out user',
-      })
-      signOut()
-      router.push('/signin')
-    }
+    router.push('/dashboard')
+    return <></>
   }
 
   return (
@@ -50,7 +36,7 @@ export default function Home() {
             <CardDescription>Looks like you are not logged in!</CardDescription>
           </CardHeader>
           <CardContent>
-            <Button onClick={handleGoogleSignin} variant='default'>
+            <Button onClick={handleGithubSignin} variant='default'>
               Sign in with Github
             </Button>
           </CardContent>
@@ -58,7 +44,9 @@ export default function Home() {
             <p>Card Footer</p>
           </CardFooter> */}
         </Card>
-      ) : null}
+      ) : (
+        <></>
+      )}
     </div>
   )
 }
